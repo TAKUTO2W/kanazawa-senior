@@ -1,0 +1,45 @@
+name: Daily Property Update
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 毎日 JST 06:00 (UTC 21:00前日)
+  workflow_dispatch:        # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Claude Code daily collection
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            指示書（README.md のセクション4参照）に従い、本日分の物件情報収集を実行してください。
+            1. さくらホーム・アットホーム投資・楽待・健美家・不動産連合隊・アーバンホームから、
+               金沢市の対象エリア（鞍月・大友・直江・戸水・藤江北・無量寺・畝田・北町・駅西新町・西念）×
+               対象種別（一棟マンション・一棟アパート・売ビル・売寮・元社員寮・元社宅・元ホテル）の情報を検索・取得する
+            2. data/properties.json と照合し、新規/価格変更/利回り変更/掲載終了を検知する
+            3. 採点ルール（県庁エリア適性20点・医療利便20点・転用しやすさ20点・取得可能性20点・収益バランス20点）でスコアリングする
+            4. data/properties.json を更新し、data/diff_log.csv に差分を追記する
+            5. 以下の通知条件に合致するものがあれば LINE へ通知する:
+               - 新規A候補（60点以上）
+               - 価格5%以上下落
+               - 価格2億円以下かつ20戸以上
+               - RC/SRC/鉄骨かつEVあり
+               - 県庁エリア適性18点以上
+            6. 変更を git commit・push する
+            作業の最後に、本日の差分サマリー（新規n件、価格変更n件、掲載終了n件）を報告してください。
+          line_notify_token: ${{ secrets.LINE_NOTIFY_TOKEN }}
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "chore: daily property update $(date +'%Y-%m-%d')"
+          git push

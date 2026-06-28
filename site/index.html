@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金沢シニアレジデンス候補リスト</title>
+<style>
+  :root {
+    --color-a: #1a6b2f;
+    --bg-a: #d4edda;
+    --color-b: #0d47a1;
+    --bg-b: #bbdefb;
+    --color-c: #e65100;
+    --bg-c: #ffe0b2;
+    --color-d: #555;
+    --bg-d: #eeeeee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; font-size: 13px; background: #f5f5f5; color: #222; }
+  header { background: #1a3c6e; color: #fff; padding: 16px 20px; }
+  header h1 { font-size: 18px; }
+  header .meta { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+  .controls { background: #fff; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-bottom: 1px solid #ddd; }
+  .controls label { font-size: 12px; color: #555; }
+  .controls select, .controls input { padding: 5px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; }
+  .controls button { padding: 5px 12px; background: #1a3c6e; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .controls button:hover { background: #2a5cab; }
+  .summary { padding: 10px 20px; font-size: 12px; color: #555; background: #fff; border-bottom: 1px solid #eee; }
+  .summary span { margin-right: 16px; font-weight: bold; }
+  .table-wrap { overflow-x: auto; padding: 16px 20px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; min-width: 1200px; }
+  thead th { background: #1a3c6e; color: #fff; padding: 8px 6px; text-align: left; white-space: nowrap; font-size: 12px; cursor: pointer; user-select: none; }
+  thead th:hover { background: #2a5cab; }
+  thead th.sort-asc::after { content: ' ▲'; }
+  thead th.sort-desc::after { content: ' ▼'; }
+  tbody tr { border-bottom: 1px solid #eee; }
+  tbody tr:hover { background: #f0f4ff; }
+  td { padding: 7px 6px; vertical-align: top; font-size: 12px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-weight: bold; font-size: 11px; }
+  .badge-A { background: var(--bg-a); color: var(--color-a); }
+  .badge-B { background: var(--bg-b); color: var(--color-b); }
+  .badge-C { background: var(--bg-c); color: var(--color-c); }
+  .badge-D { background: var(--bg-d); color: var(--color-d); }
+  .badge-other { background: #f3e5f5; color: #6a1b9a; }
+  .score-bar { display: inline-block; width: 40px; height: 8px; background: #eee; border-radius: 4px; vertical-align: middle; margin-right: 4px; }
+  .score-fill { height: 8px; border-radius: 4px; background: #1a3c6e; }
+  .status-公開中 { color: #1a6b2f; font-weight: bold; }
+  .status-掲載終了 { color: #c62828; }
+  .status-探索中 { color: #0d47a1; }
+  .status-要確認 { color: #e65100; }
+  a.src { color: #1a3c6e; font-size: 11px; }
+  .no-data { text-align: center; padding: 40px; color: #999; }
+  #diff-section { margin: 0 20px 20px; background: #fff; border: 1px solid #ddd; border-radius: 6px; }
+  #diff-section h2 { background: #37474f; color: #fff; padding: 10px 16px; font-size: 14px; border-radius: 6px 6px 0 0; }
+  #diff-table { width: 100%; border-collapse: collapse; }
+  #diff-table th, #diff-table td { padding: 7px 10px; border-bottom: 1px solid #eee; font-size: 12px; text-align: left; }
+  #diff-table th { background: #eceff1; }
+  @media (max-width: 768px) {
+    .controls { flex-direction: column; align-items: flex-start; }
+    .table-wrap { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>金沢シニアレジデンス候補リスト</h1>
+  <div class="meta" id="last-updated">読み込み中...</div>
+</header>
+
+<div class="controls">
+  <label>優先度
+    <select id="filter-priority">
+      <option value="">すべて</option>
+      <option value="A">A（最優先）</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+  </label>
+  <label>エリア
+    <select id="filter-area"><option value="">すべて</option></select>
+  </label>
+  <label>種別
+    <select id="filter-type"><option value="">すべて</option></select>
+  </label>
+  <label>価格上限（万円）
+    <input type="number" id="filter-price" placeholder="例: 10000" style="width:100px">
+  </label>
+  <label>掲載状態
+    <select id="filter-status">
+      <option value="">すべて</option>
+      <option value="公開中">公開中</option>
+      <option value="探索中">探索中</option>
+      <option value="要確認">要確認</option>
+      <option value="掲載終了">掲載終了</option>
+    </select>
+  </label>
+  <label>並び替え
+    <select id="sort-key">
+      <option value="total_score_desc">総合点（高い順）</option>
+      <option value="total_score_asc">総合点（低い順）</option>
+      <option value="price_asc">価格（安い順）</option>
+      <option value="price_desc">価格（高い順）</option>
+      <option value="yield_desc">利回り（高い順）</option>
+      <option value="updated_desc">最終更新（新しい順）</option>
+    </select>
+  </label>
+  <button onclick="resetFilters()">リセット</button>
+</div>
+
+<div class="summary" id="summary"></div>
+
+<div class="table-wrap">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>優先度</th>
+        <th>物件名</th>
+        <th>エリア</th>
+        <th>種別</th>
+        <th>価格（万円）</th>
+        <th>利回り</th>
+        <th>戸数</th>
+        <th>築年</th>
+        <th>構造</th>
+        <th>EV</th>
+        <th>総合点</th>
+        <th>県庁</th>
+        <th>医療</th>
+        <th>転用</th>
+        <th>取得</th>
+        <th>掲載状態</th>
+        <th>次アクション</th>
+        <th>最終更新</th>
+        <th>ソース</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr><td colspan="20" class="no-data">読み込み中...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="diff-section">
+  <h2>更新履歴（直近）</h2>
+  <table id="diff-table">
+    <thead><tr><th>日時</th><th>物件名</th><th>変更種別</th><th>新価格</th><th>旧価格</th><th>URL</th><th>備考</th></tr></thead>
+    <tbody id="diff-body"><tr><td colspan="7" style="text-align:center;padding:20px;color:#999">読み込み中...</td></tr></tbody>
+  </table>
+</div>
+
+<script>
+let allData = [];
+
+function priorityClass(p) {
+  if (p === 'A') return 'badge-A';
+  if (p === 'B') return 'badge-B';
+  if (p === 'C') return 'badge-C';
+  if (p === 'D') return 'badge-D';
+  return 'badge-other';
+}
+
+function scoreBar(score) {
+  const pct = Math.min(100, (score / 100) * 100);
+  return `<span class="score-bar"><span class="score-fill" style="width:${pct}%"></span></span>${score}`;
+}
+
+function fmt(v, suffix) {
+  if (v === null || v === undefined) return '<span style="color:#aaa">—</span>';
+  return v + (suffix || '');
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('table-body');
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="20" class="no-data">該当する物件がありません</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td>${r.no}</td>
+      <td><span class="badge ${priorityClass(r.priority)}">${r.priority}</span></td>
+      <td style="min-width:180px;max-width:260px">${r.name}</td>
+      <td style="white-space:nowrap">${r.area}</td>
+      <td style="white-space:nowrap">${r.type}</td>
+      <td style="text-align:right">${r.price_man_yen !== null ? r.price_man_yen.toLocaleString() : '—'}</td>
+      <td style="text-align:right">${r.yield_pct !== null ? r.yield_pct + '%' : '—'}</td>
+      <td style="text-align:right">${r.units !== null ? r.units : '—'}</td>
+      <td>${r.built_year !== null ? r.built_year : '—'}</td>
+      <td>${r.structure}</td>
+      <td>${r.elevator}</td>
+      <td style="white-space:nowrap">${scoreBar(r.total_score)}</td>
+      <td style="text-align:center">${r.score_prefecture_area}</td>
+      <td style="text-align:center">${r.score_medical_living}</td>
+      <td style="text-align:center">${r.score_conversion}</td>
+      <td style="text-align:center">${r.score_acquirability}</td>
+      <td><span class="status-${r.status}">${r.status}</span></td>
+      <td style="min-width:120px;max-width:200px;font-size:11px">${r.next_action}</td>
+      <td style="white-space:nowrap;font-size:11px">${r.last_updated_at}</td>
+      <td>${r.source_url ? `<a class="src" href="${r.source_url}" target="_blank" rel="noopener">リンク↗</a>` : '—'}</td>
+    </tr>
+  `).join('');
+}
+
+function getFiltered() {
+  const priority = document.getElementById('filter-priority').value;
+  const area = document.getElementById('filter-area').value;
+  const type = document.getElementById('filter-type').value;
+  const priceMax = parseFloat(document.getElementById('filter-price').value) || Infinity;
+  const status = document.getElementById('filter-status').value;
+  const sortKey = document.getElementById('sort-key').value;
+
+  let data = allData.filter(r => {
+    if (priority && r.priority !== priority) return false;
+    if (area && r.area !== area) return false;
+    if (type && r.type !== type) return false;
+    if (r.price_man_yen !== null && r.price_man_yen > priceMax) return false;
+    if (status && r.status !== status) return false;
+    return true;
+  });
+
+  const [key, dir] = sortKey.split('_');
+  const asc = dir === 'asc';
+  data.sort((a, b) => {
+    let av, bv;
+    if (key === 'total') { av = a.total_score; bv = b.total_score; }
+    else if (key === 'price') { av = a.price_man_yen ?? Infinity; bv = b.price_man_yen ?? Infinity; }
+    else if (key === 'yield') { av = a.yield_pct ?? -Infinity; bv = b.yield_pct ?? -Infinity; }
+    else if (key === 'updated') { av = a.last_updated_at; bv = b.last_updated_at; }
+    else { av = a.total_score; bv = b.total_score; }
+    if (av < bv) return asc ? -1 : 1;
+    if (av > bv) return asc ? 1 : -1;
+    return 0;
+  });
+
+  return data;
+}
+
+function updateSummary(data) {
+  const counts = { A: 0, B: 0, C: 0, D: 0, other: 0 };
+  data.forEach(r => {
+    if (counts[r.priority] !== undefined) counts[r.priority]++;
+    else counts.other++;
+  });
+  document.getElementById('summary').innerHTML =
+    `全 <span>${data.length}</span>件 ／ ` +
+    `<span style="color:var(--color-a)">A: ${counts.A}</span> ` +
+    `<span style="color:var(--color-b)">B: ${counts.B}</span> ` +
+    `<span style="color:var(--color-c)">C: ${counts.C}</span> ` +
+    `<span style="color:var(--color-d)">D: ${counts.D}</span>`;
+}
+
+function applyFilters() {
+  const data = getFiltered();
+  renderTable(data);
+  updateSummary(data);
+}
+
+function resetFilters() {
+  ['filter-priority','filter-area','filter-type','filter-status'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('filter-price').value = '';
+  document.getElementById('sort-key').value = 'total_score_desc';
+  applyFilters();
+}
+
+function populateSelects() {
+  const areas = [...new Set(allData.map(r => r.area))].sort();
+  const types = [...new Set(allData.map(r => r.type))].sort();
+  const areaEl = document.getElementById('filter-area');
+  const typeEl = document.getElementById('filter-type');
+  areas.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; areaEl.appendChild(o); });
+  types.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; typeEl.appendChild(o); });
+}
+
+async function loadDiff() {
+  try {
+    const res = await fetch('../data/diff_log.csv');
+    if (!res.ok) return;
+    const text = await res.text();
+    const lines = text.trim().split('\n').filter(l => l.trim());
+    if (lines.length <= 1) return;
+    const rows = lines.slice(1).reverse().slice(0, 20);
+    document.getElementById('diff-body').innerHTML = rows.map(line => {
+      const cols = line.split(',');
+      return `<tr>${cols.map(c => `<td>${c}</td>`).join('')}</tr>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function init() {
+  try {
+    const res = await fetch('../data/properties.json');
+    allData = await res.json();
+    const latestUpdate = allData.reduce((m, r) => r.last_updated_at > m ? r.last_updated_at : m, '');
+    document.getElementById('last-updated').textContent = `最終更新: ${latestUpdate} ／ 物件数: ${allData.length}件`;
+    populateSelects();
+    applyFilters();
+    await loadDiff();
+    ['filter-priority','filter-area','filter-type','filter-status','sort-key'].forEach(id =>
+      document.getElementById(id).addEventListener('change', applyFilters));
+    document.getElementById('filter-price').addEventListener('input', applyFilters);
+  } catch(e) {
+    document.getElementById('table-body').innerHTML = `<tr><td colspan="20" class="no-data">データの読み込みに失敗しました: ${e.message}</td></tr>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
