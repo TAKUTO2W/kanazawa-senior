@@ -276,7 +276,7 @@ function populateSelects() {
 
 async function loadDiff() {
   try {
-    const res = await fetch('../data/diff_log.csv');
+    const res = await fetch('https://raw.githubusercontent.com/TAKUTO2W/kanazawa-senior/main/data/diff_log.csv');
     if (!res.ok) return;
     const text = await res.text();
     const lines = text.trim().split('\n').filter(l => l.trim());
@@ -291,7 +291,7 @@ async function loadDiff() {
 
 async function init() {
   try {
-    const res = await fetch('../data/properties.json');
+    const res = await fetch('https://raw.githubusercontent.com/TAKUTO2W/kanazawa-senior/main/data/properties.json');
     allData = await res.json();
     const latestUpdate = allData.reduce((m, r) => r.last_updated_at > m ? r.last_updated_at : m, '');
     document.getElementById('last-updated').textContent = `最終更新: ${latestUpdate} ／ 物件数: ${allData.length}件`;
