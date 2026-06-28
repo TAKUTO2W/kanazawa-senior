@@ -26,7 +26,8 @@ jobs:
             2. data/properties.json と照合し、新規/価格変更/利回り変更/掲載終了を検知する
             3. 採点ルール（県庁エリア適性20点・医療利便20点・転用しやすさ20点・取得可能性20点・収益バランス20点）でスコアリングする
             4. data/properties.json を更新し、data/diff_log.csv に差分を追記する
-            5. 以下の通知条件に合致するものがあれば LINE へ通知する:
+            5. 以下の通知条件に合致するものがあれば後続ステップで Gmail 通知できるよう
+               /tmp/notify.txt にサマリーを書き出す:
                - 新規A候補（60点以上）
                - 価格5%以上下落
                - 価格2億円以下かつ20戸以上
@@ -34,7 +35,39 @@ jobs:
                - 県庁エリア適性18点以上
             6. 変更を git commit・push する
             作業の最後に、本日の差分サマリー（新規n件、価格変更n件、掲載終了n件）を報告してください。
-          line_notify_token: ${{ secrets.LINE_NOTIFY_TOKEN }}
+
+      - name: Send Gmail notification
+        if: always()
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          NOTIFY_FILE="/tmp/notify.txt"
+          if [ ! -f "$NOTIFY_FILE" ]; then
+            echo "通知対象なし" > "$NOTIFY_FILE"
+          fi
+          BODY=$(cat "$NOTIFY_FILE")
+          DATE=$(date +'%Y-%m-%d')
+          python3 - <<EOF
+          import smtplib
+          from email.mime.text import MIMEText
+          import os
+
+          user = os.environ['GMAIL_USER']
+          password = os.environ['GMAIL_APP_PASSWORD']
+          body = """$BODY"""
+          date = "$DATE"
+
+          msg = MIMEText(body, 'plain', 'utf-8')
+          msg['Subject'] = f'【金沢シニアレジデンス】{date} 物件更新サマリー'
+          msg['From'] = user
+          msg['To'] = user
+
+          with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+              smtp.login(user, password)
+              smtp.send_message(msg)
+          print("メール送信完了")
+          EOF
 
       - name: Commit and push if changed
         run: |
