@@ -1142,5 +1142,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-06",
     "last_updated_at": "2026-07-06"
+  },
+  {
+    "name": "金沢市問屋町1丁目 売ビル（アットホーム/MapFan掲載）",
+    "area": "問屋町",
+    "address": "石川県金沢市問屋町1丁目",
+    "type": "売ビル",
+    "price_man_yen": null,
+    "yield_pct": null,
+    "units": null,
+    "built_year": null,
+    "structure": "要確認",
+    "elevator": "要確認",
+    "score_prefecture_area": 16,
+    "score_medical_living": 14,
+    "score_conversion": 10,
+    "score_acquirability": 18,
+    "total_score": 58,
+    "priority": "B",
+    "next_action": "アットホーム/MapFan詳細で価格・構造・規模を確認。問屋町はSランクエリアのため優先対応。",
+    "notes": "MapFanの売ビル一覧で問屋町1丁目の物件1件を確認。Sランク対象エリア。県庁・中央病院へのバスアクセス良好。転用適性は業態転換の余地あり。",
+    "source_url": "https://mapfan.com/realestate/buy-building/address/17201/properties",
+    "status": "公開中",
+    "no": 45,
+    "category": "公開売出し",
+    "first_detected_at": "2026-07-09",
+    "last_updated_at": "2026-07-09"
   }
 ]
