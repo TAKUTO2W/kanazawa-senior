@@ -1168,5 +1168,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-09",
     "last_updated_at": "2026-07-09"
+  },
+  {
+    "name": "金沢市堀川町 一棟アパート（健美家 掲載）9戸",
+    "area": "堀川町（駅西本町・西念隣接）",
+    "address": "石川県金沢市堀川町",
+    "type": "一棟アパート",
+    "price_man_yen": 5580,
+    "yield_pct": 10.0,
+    "units": 9,
+    "built_year": 1986,
+    "structure": "RC（要確認）",
+    "elevator": "要確認",
+    "score_prefecture_area": 12,
+    "score_medical_living": 14,
+    "score_conversion": 10,
+    "score_acquirability": 18,
+    "total_score": 54,
+    "priority": "C",
+    "next_action": "健美家物件詳細確認・構造・間取り・エレベーター有無を確認後、不動産会社に問い合わせ",
+    "notes": "金沢駅徒歩8分・IRいしかわ鉄道駅近。駅西本町・西念エリアに近接。1986年築で築40年超、耐震補強状況の確認が必須。利回り10%は魅力だが戸数9戸で転用規模はやや小さい。価格帯は対象範囲内（8,000万以下）",
+    "source_url": "https://www.kenbiya.com/pp2/z/ishikawa/kanazawa-shi/",
+    "status": "公開中",
+    "no": 46,
+    "category": "公開売出し",
+    "first_detected_at": "2026-07-13",
+    "last_updated_at": "2026-07-13"
   }
 ]
