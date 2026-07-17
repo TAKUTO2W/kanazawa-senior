@@ -1194,5 +1194,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-13",
     "last_updated_at": "2026-07-13"
+  },
+  {
+    "name": "西念1丁目 事業用スペース付住宅（LUANECT掲載）",
+    "area": "西念",
+    "address": "石川県金沢市西念1丁目",
+    "type": "売ビル（事業用スペース付）",
+    "price_man_yen": 5200,
+    "yield_pct": null,
+    "units": null,
+    "built_year": null,
+    "structure": "要確認",
+    "elevator": "要確認",
+    "score_prefecture_area": 14,
+    "score_medical_living": 15,
+    "score_conversion": 8,
+    "score_acquirability": 14,
+    "total_score": 51,
+    "priority": "B",
+    "next_action": "LUANECT（金沢駅徒歩12分）へ連絡し、建物構造・階数・延床面積・事業用スペック詳細を確認。転用可能性（寮・社宅等）を精査",
+    "notes": "西念は対象エリア。金沢駅徒歩12分の好立地。3SLDK表記のため規模は小さい可能性あり。5,200万円は価格帯適合。事業用スペース付きなので業態転用の柔軟性あり",
+    "source_url": "https://www.luanect.com/",
+    "status": "公開中",
+    "no": 47,
+    "category": "公開売出し",
+    "first_detected_at": "2026-07-17",
+    "last_updated_at": "2026-07-17"
   }
 ]
