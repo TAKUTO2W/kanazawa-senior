@@ -1220,5 +1220,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-17",
     "last_updated_at": "2026-07-17"
+  },
+  {
+    "name": "金沢市橋場町 RC5階建一棟マンション（健美家掲載）",
+    "area": "橋場町（中心部・参考）",
+    "address": "石川県金沢市橋場町8-2",
+    "type": "一棟マンション",
+    "price_man_yen": 6700,
+    "yield_pct": 11.47,
+    "units": 8,
+    "built_year": 1989,
+    "structure": "RC",
+    "elevator": "要確認",
+    "score_prefecture_area": 8,
+    "score_medical_living": 14,
+    "score_conversion": 10,
+    "score_acquirability": 18,
+    "total_score": 50,
+    "priority": "C",
+    "next_action": "対象エリア外のため参考扱い。健美家ページで構造・間取り詳細確認後、エリア優先度を再評価",
+    "notes": "健美家スニペットで確認。IRいしかわ鉄道金沢駅徒歩26分・1989年築・5階建8戸。利回り11.47%は高水準だが対象Sランクエリア外。鞍月・大友等への転用用途での検討は困難。価格帯は条件内（8,000万以下で若干下回る）。",
+    "source_url": "https://www.kenbiya.com/pp0/z/ishikawa/kanazawa-shi/n-2/",
+    "status": "公開中",
+    "no": 48,
+    "category": "公開売出し",
+    "first_detected_at": "2026-07-24",
+    "last_updated_at": "2026-07-24"
   }
 ]
