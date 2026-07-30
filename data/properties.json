@@ -1298,5 +1298,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-25",
     "last_updated_at": "2026-07-25"
+  },
+  {
+    "name": "楽待掲載 金沢市西念周辺 店舗付き収益物件（西念2丁目近接）",
+    "area": "西念",
+    "address": "石川県金沢市西念周辺（KAJIMARTクロスゲート店828m圏）",
+    "type": "売ビル（店舗兼住居）",
+    "price_man_yen": null,
+    "yield_pct": 13.84,
+    "units": null,
+    "built_year": null,
+    "structure": "要確認（平成17年増築あり）",
+    "elevator": "要確認",
+    "score_prefecture_area": 14,
+    "score_medical_living": 16,
+    "score_conversion": 10,
+    "score_acquirability": 16,
+    "total_score": 56,
+    "priority": "C",
+    "next_action": "楽待詳細ページ（dim1005/3638400）にて価格・構造・戸数確認。想定利回り13.84%は高水準だが空室あり。西念エリアSランク対象のため詳細精査を優先。既存物件「西念1丁目 店舗・2LDK」との同一性確認が必要。",
+    "notes": "楽待掲載。想定利回り13.84%・空室あり。ファミマ金沢西念二丁目店335m・スギ薬局金沢駅西店709m圏。平成17年増築。既存リスト「西念1丁目 店舗・2LDK」と近いが所在丁目・詳細が異なる可能性。重複確認要。",
+    "source_url": "https://www.rakumachi.jp/syuuekibukken/koshinetsu/ishikawa/dim1005/3638400/show.html",
+    "status": "公開中",
+    "no": 51,
+    "category": "公開売出し",
+    "first_detected_at": "2026-07-30",
+    "last_updated_at": "2026-07-30"
   }
 ]
