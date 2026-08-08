@@ -1324,5 +1324,31 @@
     "category": "公開売出し",
     "first_detected_at": "2026-07-30",
     "last_updated_at": "2026-07-30"
+  },
+  {
+    "name": "金沢市三十苅町 一棟売りマンション（6階建・43室＋テナント7室）",
+    "area": "三十苅町",
+    "address": "石川県金沢市三十苅町",
+    "type": "一棟マンション",
+    "price_man_yen": null,
+    "yield_pct": 9.46,
+    "units": 50,
+    "built_year": null,
+    "structure": "RC造6階建（登記上8階建）",
+    "elevator": "要確認",
+    "score_prefecture_area": 8,
+    "score_medical_living": 12,
+    "score_conversion": 16,
+    "score_acquirability": 14,
+    "total_score": 50,
+    "priority": "C",
+    "next_action": "価格・詳細資料を取得し、改装費込み実質利回りと駅西エリアとの距離を確認",
+    "notes": "住居43室＋テナント7室・2年収入保証（月170万円）・2000万円リフォーム費込。現況利回り9.46%、満室想定12.89%。H29以降の改装費累計約9,000万円（税抜）。固定資産評価額合計1億6,900万円。乙丸駅徒歩6分。Sランクエリア外だが大規模物件として転用ポテンシャルは高い。",
+    "source_url": "https://www.joint21.com/sale-business/city/17201/202843/",
+    "status": "公開中",
+    "no": 52,
+    "category": "公開売出し",
+    "first_detected_at": "2026-08-08",
+    "last_updated_at": "2026-08-08"
   }
 ]
