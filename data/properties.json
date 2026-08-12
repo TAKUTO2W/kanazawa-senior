@@ -1350,5 +1350,32 @@
     "category": "公開売出し",
     "first_detected_at": "2026-08-08",
     "last_updated_at": "2026-08-08"
+  },
+  {
+    "name": "金沢市横山町 RC一棟マンション（楽待No.3652603）",
+    "area": "横山町（参考掲載・準Sエリア）",
+    "address": "石川県金沢市横山町",
+    "type": "一棟マンション",
+    "price_man_yen": null,
+    "yield_pct": null,
+    "units": 8,
+    "built_year": null,
+    "structure": "RC",
+    "elevator": "有（2020年リニューアル済）",
+    "score_prefecture_area": 8,
+    "score_medical_living": 16,
+    "score_conversion": 14,
+    "score_acquirability": 16,
+    "score_price_yield": 12,
+    "total_score": 66,
+    "priority": "B",
+    "next_action": "価格・利回りを楽待ページで詳細確認。対象エリア外（横山町）のため参考情報として保管。エリア内物件が出なければ検討候補に。",
+    "notes": "RC造6階建・全8戸・全戸3LDKファミリータイプ・EV更新済・7室リノベ済・満室稼働・基地局収入年約118万円。エリアは兼六園周辺で本来のSランクエリア外だが、RC/EV/満室/利回り指標が揃っている点で参考価値あり。",
+    "source_url": "https://www.rakumachi.jp/syuuekibukken/koshinetsu/ishikawa/dim1005/3652603/show.html",
+    "status": "公開中",
+    "no": 53,
+    "category": "公開売出し",
+    "first_detected_at": "2026-08-12",
+    "last_updated_at": "2026-08-12"
   }
 ]
