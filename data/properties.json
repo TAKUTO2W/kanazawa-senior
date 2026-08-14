@@ -1377,5 +1377,32 @@
     "category": "公開売出し",
     "first_detected_at": "2026-08-12",
     "last_updated_at": "2026-08-12"
+  },
+  {
+    "name": "金沢市 上諸江駅周辺 一棟売り収益物件（健美家 三ツ屋駅エリア・詳細未公開）",
+    "area": "諸江/上諸江（三ツ屋駅・上諸江駅圏）",
+    "address": "石川県金沢市諸江町周辺（詳細要確認）",
+    "type": "一棟マンション",
+    "price_man_yen": null,
+    "yield_pct": null,
+    "units": null,
+    "built_year": null,
+    "structure": "要確認",
+    "elevator": "要確認",
+    "score_prefecture_area": 14,
+    "score_medical_living": 14,
+    "score_conversion": 12,
+    "score_acquirability": 12,
+    "score_price_yield": 10,
+    "total_score": 62,
+    "priority": "B",
+    "next_action": "健美家・楽待にて三ツ屋駅・上諸江駅エリアの一棟物件を会員登録後に詳細確認。Sランクエリア（諸江）に該当するため優先的に追跡",
+    "notes": "健美家で三ツ屋駅エリアに2件確認（詳細はログイン必要）。諸江はSランクエリア。バス・県立中央病院アクセスも良好。詳細取得次第スコア再評価が必要。",
+    "source_url": "https://www.kenbiya.com/pp0/z/ishikawa/kanazawa-shi/eki-00186/",
+    "status": "要確認",
+    "no": 54,
+    "category": "公開売出し",
+    "first_detected_at": "2026-08-14",
+    "last_updated_at": "2026-08-14"
   }
 ]
