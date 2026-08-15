@@ -1404,5 +1404,32 @@
     "category": "公開売出し",
     "first_detected_at": "2026-08-14",
     "last_updated_at": "2026-08-14"
+  },
+  {
+    "name": "ハイカムール・エスペランス",
+    "area": "諸江",
+    "address": "石川県金沢市諸江町中丁136-1",
+    "type": "一棟アパート（軽量鉄骨・2棟構成）",
+    "price_man_yen": 8500,
+    "yield_pct": 9.01,
+    "units": 10,
+    "built_year": 1997,
+    "structure": "軽量鉄骨造（S造）",
+    "elevator": "無",
+    "score_prefecture_area": 12,
+    "score_medical_living": 13,
+    "score_conversion": 13,
+    "score_acquirability": 18,
+    "score_income_price": 16,
+    "total_score": 72,
+    "priority": "B",
+    "next_action": "楽待・ホームズ掲載業者へ問い合わせ。A棟・B棟の実稼働率・管理状況・修繕履歴を確認。2DK以上主体で転用適性あり。",
+    "notes": "諸江町中丁はSランクエリア（諸江）に該当。磯部駅徒歩5分・バスアクセス良好。軽鉄2階建て2棟計10戸（1LDK×1・2LDK×9）、土地785㎡と広め。築28年で修繕要確認。EVなし・戸数10戸のため転用スコアはやや低め。利回り9.01%・価格8,500万円は採点基準内。複数ポータル（楽待・ホームズ・健美家）に掲載中で取得可能性は高い。",
+    "source_url": "https://www.rakumachi.jp/syuuekibukken/koshinetsu/ishikawa/dim1002/3617686/show.html",
+    "status": "公開中",
+    "no": 55,
+    "category": "公開売出し",
+    "first_detected_at": "2026-08-15",
+    "last_updated_at": "2026-08-15"
   }
 ]
